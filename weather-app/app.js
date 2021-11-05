@@ -1,5 +1,6 @@
 const config = require('../config');
 const request = require('request');
+const geocode = require('./utils/geocode');
 
 // const url = `http://api.weatherstack.com/current?access_key=${config.wsKey}&query=37.8267,-122.4233`;
 
@@ -16,20 +17,25 @@ const request = require('request');
 //   }
 // });
 
-const geocodeURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/philadelphia.json?access_token=${config.mbKey}`;
+// const geocodeURL = `https://api.mapbox.com/geocoding/v5/mapbox.places/philadelphia.json?access_token=${config.mbKey}`;
 
-request({
-  url: geocodeURL,
-  json: true
-}, (error, response) => {
+// request({
+//   url: geocodeURL,
+//   json: true
+// }, (error, response) => {
   
-  if (error) {
-    console.log('Unable to connect to mapbox service!');
-  } else if (response.body.features.length === 0) {
-    console.log('Unable to find location. Try another search.');
-  } else {
-    const latitude = response.body.features[0].center[1];
-    const longitude = response.body.features[0].center[0];
-    console.log(latitude, longitude);
-  }
+//   if (error) {
+//     console.log('Unable to connect to mapbox service!');
+//   } else if (response.body.features.length === 0) {
+//     console.log('Unable to find location. Try another search.');
+//   } else {
+//     const latitude = response.body.features[0].center[1];
+//     const longitude = response.body.features[0].center[0];
+//     console.log(latitude, longitude);
+//   }
+// });
+
+geocode('Boston', (error, data) => {
+  console.log('Error ', error);
+  console.log('Data ', data);
 });
